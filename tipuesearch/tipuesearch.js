@@ -397,7 +397,42 @@ http://www.tipue.com/search
                                              }
                                              else
                                              {
-                                                  for (var f = 0; f < set.descriptiveWords; f++)
+                                                  var f = t_w.length - set.descriptiveWords;
+                                                  var fnd_index = 0;
+                                                  var wrd = '';
+                                                  var wrd_expr;
+
+                                                  for (var d_w_i = 0; d_w_i < d_w.length; d_w_i++)
+                                                  {
+                                                       wrd += d_w[d_w_i];
+                                                       if (d_w_i < d_w.length - 1)
+                                                       {
+                                                            wrd += '|';
+                                                       }
+                                                  }
+
+                                                  wrd_expr = new RegExp('(' + wrd + ')', 'i');
+
+                                                  for (; fnd_index < f; fnd_index++)
+                                                  {
+                                                       if (wrd_expr.test(t_w[fnd_index]))
+                                                       {
+                                                            break;
+                                                       }
+                                                  }
+                                                  f = Math.min(f, fnd_index);
+
+                                                  if (f > 10)
+                                                  {
+                                                       f -= 5;
+                                                       t_d += '...';
+                                                  }
+                                                  else
+                                                  {
+                                                       f = 0;
+                                                  }
+
+                                                  for (var fi = 0; fi < set.descriptiveWords; fi++, f++)
                                                   {
                                                        t_d += t_w[f] + ' '; 	
                                                   }
